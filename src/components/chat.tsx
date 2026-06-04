@@ -13,6 +13,12 @@ import { useState } from "react";
 import { useChat, fetchServerSentEvents } from "@tanstack/ai-react";
 import { Button } from "./ui/button";
 import { type ModelsType } from "#/lib/schemas";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export function Chat() {
   const [input, setInput] = useState<string>("");
@@ -46,12 +52,18 @@ export function Chat() {
               {message.parts.map((part, idx) => {
                 if (part.type === "thinking") {
                   return (
-                    <div
-                      key={idx}
-                      className="mb-2 text-sm text-gray-500 italic"
+                    <Accordion
+                      type="single"
+                      collapsible
+                      defaultValue="thinking"
                     >
-                      Thinking: {part.content}
-                    </div>
+                      <AccordionItem value="thinking">
+                        <AccordionTrigger>Thinking</AccordionTrigger>
+                        <AccordionContent className="text-sm text-mist-500 italic">
+                          {part.content}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
                   );
                 }
                 if (part.type === "text") {
