@@ -9,8 +9,10 @@ import {
 } from "./ui/select";
 import { Textarea } from "./ui/textarea";
 import { modelsSchema } from "#/lib/schemas";
+import type { IndicatorStatus } from "#/lib/types";
 import { useState } from "react";
 import { useChat, fetchServerSentEvents } from "@tanstack/ai-react";
+import type { ToolCallPart } from "@tanstack/ai-client";
 import { Button } from "./ui/button";
 import { type ModelsType } from "#/lib/schemas";
 import {
@@ -20,13 +22,61 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+type ChatStatus = ReturnType<typeof useChat>["status"];
+type ChatMessages = ReturnType<typeof useChat>["messages"];
+
+function getIndicatorStatus({
+  messages,
+  status,
+  error,
+}: {
+  messages: ChatMessages;
+  status: ChatStatus;
+  error: Error | null | undefined;
+}): IndicatorStatus {
+  const activeToolCall = messages
+    .at(-1)
+    ?.parts.find(
+      (part): part is ToolCallPart =>
+        part.type === "tool-call" && part.state !== "complete",
+    );
+
+  if (activeToolCall) {
+    return { type: "fetching", fetching: activeToolCall.name };
+  }
+
+  if (status === "submitted") {
+    return { type: "loading" };
+  }
+
+  if (status === "streaming") {
+    return { type: "streaming" };
+  }
+
+  if (status === "error") {
+    return { type: "error", error: error?.message ?? "response failed" };
+  }
+
+  if (messages.length > 0) {
+    return { type: "complete" };
+  }
+
+  return { type: "waiting" };
+}
+
 export function Chat() {
   const [input, setInput] = useState<string>("");
   const [selectedModel, setSelectedModel] = useState<ModelsType>();
 
-  const { messages, sendMessage, isLoading, clear } = useChat({
+  const { messages, sendMessage, isLoading, clear, status, error } = useChat({
     connection: fetchServerSentEvents("/api/chat"),
     forwardedProps: { model: selectedModel },
+  });
+
+  const indicatorStatus = getIndicatorStatus({
+    messages,
+    status,
+    error,
   });
 
   const handleSubmit = (e: React.SubmitEvent) => {
@@ -93,7 +143,7 @@ export function Chat() {
       </form>
 
       <div className="mt-2 flex h-8 items-center">
-        <Indicator status={{ type: "complete" }} />
+        <Indicator status={indicatorStatus} />
         <Button
           className="mr-2 ml-auto border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
           onClick={clear}
