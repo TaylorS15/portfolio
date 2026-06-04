@@ -24,7 +24,7 @@ export function Chat() {
   const [input, setInput] = useState<string>("");
   const [selectedModel, setSelectedModel] = useState<ModelsType>();
 
-  const { messages, sendMessage, isLoading } = useChat({
+  const { messages, sendMessage, isLoading, clear } = useChat({
     connection: fetchServerSentEvents("/api/chat"),
     forwardedProps: { model: selectedModel },
   });
@@ -52,11 +52,7 @@ export function Chat() {
               {message.parts.map((part, idx) => {
                 if (part.type === "thinking") {
                   return (
-                    <Accordion
-                      type="single"
-                      collapsible
-                      defaultValue="thinking"
-                    >
+                    <Accordion type="single" collapsible>
                       <AccordionItem value="thinking">
                         <AccordionTrigger>Thinking</AccordionTrigger>
                         <AccordionContent className="text-sm text-mist-500 italic">
@@ -80,7 +76,7 @@ export function Chat() {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="flex items-end gap-2">
+      <form onSubmit={handleSubmit} className="mt-2 flex items-end gap-2">
         <Textarea
           value={input}
           onChange={(event) => setInput(event.target.value)}
@@ -90,7 +86,7 @@ export function Chat() {
         />
         <Button
           type="submit"
-          className="border border-mist-200 bg-white text-mist-600 hover:cursor-pointer hover:bg-mist-100"
+          className="border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
         >
           Send
         </Button>
@@ -98,11 +94,17 @@ export function Chat() {
 
       <div className="mt-2 flex h-8 items-center">
         <Indicator status={{ type: "complete" }} />
+        <Button
+          className="mr-2 ml-auto border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
+          onClick={clear}
+        >
+          Clear Chat
+        </Button>
         <Select
           value={selectedModel}
           onValueChange={(value) => setSelectedModel(value as ModelsType)}
         >
-          <SelectTrigger className="ml-auto h-6 w-36">
+          <SelectTrigger className="h-6 w-36">
             <SelectValue placeholder="Select Model" />
           </SelectTrigger>
           <SelectContent position="popper">
