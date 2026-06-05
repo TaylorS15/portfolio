@@ -35,6 +35,8 @@ export const Route = createFileRoute("/api/chat")({
           );
         }
 
+        //Add message length and message number limiting
+
         try {
           const params = await chatParamsFromRequest(request);
 
