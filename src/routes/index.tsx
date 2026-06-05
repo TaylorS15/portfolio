@@ -1,4 +1,5 @@
 import { Chat } from "#/components/chat";
+import { ProjectCard } from "#/components/project-card";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 
@@ -39,25 +40,19 @@ function Home() {
             Projects & Experience
           </h2>
 
-          <div className="flex flex-row items-center justify-between gap-4">
-            <div className="flex flex-row items-center gap-4">
-              <p className="mt-1">*</p>
-              <p className="">Rolled</p>
-              <p className="text-neutral-500">-</p>
-              <p className="text-sm text-neutral-500">
-                Bankroll, session, and hand tracking for live poker players.
-              </p>
-            </div>
-            <Link to="/" className="my-auto">
-              <ArrowUpRight />
-            </Link>
-          </div>
+          <ProjectCard
+            name="Rolled"
+            description="Bankroll, session, and hand tracking for live poker players."
+            links={[""]}
+          />
         </div>
       </div>
 
       <div className="flex w-full max-w-[72rem] flex-col border border-mist-300 p-4">
         <Chat />
       </div>
+
+      <div></div>
     </main>
   );
 }

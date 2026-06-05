@@ -1,3 +1,4 @@
+import { toolDefinition } from "@tanstack/ai";
 import * as z from "zod";
 
 export const modelsSchema = z.union([
@@ -5,5 +6,12 @@ export const modelsSchema = z.union([
   z.literal("GLM-4.7 Flash"),
   z.literal("GPT-OSS-120b"),
 ]);
+
+export const getPersonalSummary = toolDefinition({
+  name: "get_personal_summary",
+  description:
+    "Get a short summary on Taylor Svec about his developer history and interests.",
+  outputSchema: z.string(),
+});
 
 export type ModelsType = z.infer<typeof modelsSchema>;

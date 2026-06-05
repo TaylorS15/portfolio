@@ -6,7 +6,13 @@ import {
 } from "@tanstack/ai";
 import { createWorkersAiChat } from "@cloudflare/tanstack-ai/adapters/workers-ai";
 import { env } from "cloudflare:workers";
-import { modelsSchema, type ModelsType } from "#/lib/schemas";
+import {
+  getPersonalSummary,
+  modelsSchema,
+  type ModelsType,
+} from "#/lib/schemas";
+import { safeParse } from "zod";
+import * as z from "zod";
 
 const workerAiModels = Object.fromEntries(
   modelsSchema.options.map(({ value }) => [
@@ -18,6 +24,23 @@ const workerAiModels = Object.fromEntries(
     }[value],
   ]),
 ) as Record<ModelsType, string>;
+
+const getPersonalSummaryServer = getPersonalSummary.server(async () => {
+  try {
+    const response = await fetch("/get_personal_summary.txt");
+    const data = await response.text();
+
+    const result = safeParse(z.string(), data);
+    if (!result.success) {
+      return "Failure to call get_personal_summary";
+    }
+
+    return result.data;
+  } catch (error) {
+    console.log(error);
+    return "Failure to call get_personal_summary";
+  }
+});
 
 export const Route = createFileRoute("/api/chat")({
   server: {
@@ -35,8 +58,6 @@ export const Route = createFileRoute("/api/chat")({
           );
         }
 
-        //Add message length and message number limiting
-
         try {
           const params = await chatParamsFromRequest(request);
 
@@ -48,6 +69,19 @@ export const Route = createFileRoute("/api/chat")({
             });
           }
 
+          const userMessagesLength = params.messages.filter(
+            (message) => message.role === "user",
+          ).length;
+          if (userMessagesLength > 3) {
+            return new Response(
+              JSON.stringify({ error: "Message Length Exceeded" }),
+              {
+                status: 400,
+                headers: { "Content-Type": "application/json" },
+              },
+            );
+          }
+
           const adapter = createWorkersAiChat(workerAiModels[model.data], {
             binding: env.AI.gateway("portfolio-gateway"),
             apiKey: env.CF_AIG_TOKEN,
@@ -56,6 +90,7 @@ export const Route = createFileRoute("/api/chat")({
           const stream = chat({
             adapter: adapter,
             messages: params.messages,
+            tools: [getPersonalSummaryServer],
           });
 
           return toServerSentEventsResponse(stream);

@@ -28,11 +28,9 @@ type ChatMessages = ReturnType<typeof useChat>["messages"];
 function getIndicatorStatus({
   messages,
   status,
-  error,
 }: {
   messages: ChatMessages;
   status: ChatStatus;
-  error: Error | null | undefined;
 }): IndicatorStatus {
   const activeToolCall = messages
     .at(-1)
@@ -53,8 +51,13 @@ function getIndicatorStatus({
     return { type: "streaming" };
   }
 
+  //Reverted to generic error message.
+  //Tanstack AI seems to discard server sent error messages.
   if (status === "error") {
-    return { type: "error", error: error?.message ?? "response failed" };
+    return {
+      type: "error",
+      error: "There has been an error! Try again in a new chat",
+    };
   }
 
   if (messages.length > 0) {
@@ -68,7 +71,7 @@ export function Chat() {
   const [input, setInput] = useState<string>("");
   const [selectedModel, setSelectedModel] = useState<ModelsType>();
 
-  const { messages, sendMessage, isLoading, clear, status, error } = useChat({
+  const { messages, sendMessage, isLoading, clear, status } = useChat({
     connection: fetchServerSentEvents("/api/chat"),
     forwardedProps: { model: selectedModel },
   });
@@ -76,7 +79,6 @@ export function Chat() {
   const indicatorStatus = getIndicatorStatus({
     messages,
     status,
-    error,
   });
 
   const handleSubmit = (e: React.SubmitEvent) => {
@@ -103,7 +105,10 @@ export function Chat() {
                 if (part.type === "thinking") {
                   return (
                     <Accordion type="single" collapsible>
-                      <AccordionItem value="thinking">
+                      <AccordionItem
+                        key={`${part.type}_${idx}`}
+                        value="thinking"
+                      >
                         <AccordionTrigger>Thinking</AccordionTrigger>
                         <AccordionContent className="text-sm text-mist-500 italic">
                           {part.content}
@@ -112,9 +117,22 @@ export function Chat() {
                     </Accordion>
                   );
                 }
+                if (part.type === "tool-call") {
+                  return (
+                    <div key={`${part.type}_${idx}`} className="mt-2">
+                      <p className="text-xs font-medium">Tool Call</p>
+                      <p className="mt-1 text-xs text-purple-500">
+                        {part.name}
+                      </p>
+                    </div>
+                  );
+                }
                 if (part.type === "text") {
                   return (
-                    <div key={idx} className="text-sm text-mist-700">
+                    <div
+                      key={`${part.type}_${idx}`}
+                      className="text-sm text-mist-700"
+                    >
                       {part.content}
                     </div>
                   );
