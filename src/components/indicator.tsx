@@ -20,15 +20,19 @@ export function Indicator({ status }: { status: IndicatorStatus }) {
           : status.type === "fetching"
             ? `fetching ${status.fetching} information...`
             : status.type === "error"
-              ? `error ${status.error}`
+              ? `${status.error}`
               : status.type === "waiting"
                 ? "waiting..."
                 : "";
   return (
     <>
       <div className="relative ml-1">
-        <div className={`absolute inset-0 h-2 w-2 rounded-full ${indicatorColor}`} />
-        <div className={`absolute inset-0 h-2 w-2 animate-ping rounded-full ${indicatorColor}`} />
+        <div
+          className={`absolute inset-0 h-2 w-2 rounded-full ${indicatorColor}`}
+        />
+        <div
+          className={`absolute inset-0 h-2 w-2 animate-ping rounded-full ${indicatorColor}`}
+        />
       </div>
 
       <p className="mt-2 ml-4 text-xs text-mist-400">{statusText}</p>
