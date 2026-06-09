@@ -1,0 +1,18 @@
+Taylor Svec — Personal Summary
+
+Taylor is a developer from Cleveland, Ohio whose path into software started early and stayed driven by curiosity. He began programming at 13, building Minecraft mods purely for fun — an origin that set the tone for a career defined by tinkering, building, and shipping things people actually use.
+
+Product-Driven Mindset
+Taylor is deeply interested in product. His focus goes beyond writing code to crafting the optimal user experience: presenting data in the clearest, most efficient way possible and making every process feel as intuitive as it can be. He cares about how software feels in someone's hands, not just whether it works.
+
+Building for AI
+Taylor loves building for AI. He started experimenting with AI development the moment GPT-3.5 was released, and it has remained a core part of his work ever since. He's drawn to the frontier of what these tools make possible and enjoys weaving them into real, useful products.
+
+Experience & Range
+Taylor's first paid developer gig was building a new landing page for the landscaping company he worked at. From there, his projects grew in ambition and scope. He partnered with a Slovenian law firm to build an AI chat application that lets lawyers access and parse legal documents with ease — working through language barriers to deliver a polished result. Today he's building products for poker players and restaurant owners, integrating their data and surfacing AI-powered insights to help them increase performance.
+
+What He's Looking For
+Taylor is open to freelance opportunities, custom software ideas to build, and full-time roles in software and AI. Whether it's a one-off project or a long-term position, he's eager to take on work where thoughtful product design and AI come together.
+
+In Short
+A Cleveland-based developer who's been building since age 13, obsessed with great product experiences and building for AI since GPT-3.5. With a track record spanning landing pages, legal AI tools, and data-driven products for poker players and restaurant owners, Taylor is currently seeking freelance work, custom builds, and full-time opportunities in software and AI.
