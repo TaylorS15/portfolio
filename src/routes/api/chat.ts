@@ -1,18 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { modelsSchema, type ModelsType } from "#/lib/schemas";
+import { getPersonalSummaryServer } from "#/lib/tools";
+import { createWorkersAiChat } from "@cloudflare/tanstack-ai/adapters/workers-ai";
 import {
   chat,
   chatParamsFromRequest,
   toServerSentEventsResponse,
 } from "@tanstack/ai";
-import { createWorkersAiChat } from "@cloudflare/tanstack-ai/adapters/workers-ai";
+import { createFileRoute } from "@tanstack/react-router";
 import { env } from "cloudflare:workers";
-import {
-  getPersonalSummary,
-  modelsSchema,
-  type ModelsType,
-} from "#/lib/schemas";
-import { safeParse } from "zod";
-import * as z from "zod";
 
 const workerAiModels = Object.fromEntries(
   modelsSchema.options.map(({ value }) => [
@@ -24,23 +19,6 @@ const workerAiModels = Object.fromEntries(
     }[value],
   ]),
 ) as Record<ModelsType, string>;
-
-const getPersonalSummaryServer = getPersonalSummary.server(async () => {
-  try {
-    const response = await fetch("/get_personal_summary.txt");
-    const data = await response.text();
-
-    const result = safeParse(z.string(), data);
-    if (!result.success) {
-      return "Failure to call get_personal_summary";
-    }
-
-    return result.data;
-  } catch (error) {
-    console.log(error);
-    return "Failure to call get_personal_summary";
-  }
-});
 
 export const Route = createFileRoute("/api/chat")({
   server: {
