@@ -144,20 +144,36 @@ export function Chat() {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-2 flex items-end gap-2">
+      <form onSubmit={handleSubmit} className="mt-2 flex h-18 items-end gap-2">
         <Textarea
           value={input}
           onChange={(event) => setInput(event.target.value)}
           maxLength={250}
-          className="resize-none text-sm placeholder:text-mist-400"
+          className="h-full resize-none text-sm placeholder:text-mist-400"
           placeholder="Ask anything about myself, my projects, or even how this AI chat is built!"
         />
-        <Button
-          type="submit"
-          className="border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
-        >
-          Send
-        </Button>
+
+        <div className="flex flex-col gap-2">
+          <Button
+            type="button"
+            onClick={() => {
+              const randomQuestion =
+                questionSuggestions[
+                  Math.floor(Math.random() * questionSuggestions.length)
+                ];
+              setInput(randomQuestion);
+            }}
+            className="border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
+          >
+            Question Suggestion
+          </Button>
+          <Button
+            type="submit"
+            className="border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
+          >
+            Send
+          </Button>
+        </div>
       </form>
 
       <div className="mt-2 flex h-8 items-center">
@@ -172,7 +188,7 @@ export function Chat() {
           value={selectedModel}
           onValueChange={(value) => setSelectedModel(value as ModelsType)}
         >
-          <SelectTrigger className="h-6 w-36">
+          <SelectTrigger className="h-6 w-40">
             <SelectValue placeholder="Select Model" />
           </SelectTrigger>
           <SelectContent position="popper">
@@ -189,3 +205,14 @@ export function Chat() {
     </>
   );
 }
+
+const questionSuggestions = [
+  "How did Taylor get started in software development?",
+  "What kind of work is Taylor looking for right now?",
+  "Tell me about the AI chat app Taylor built for a Slovenian law firm.",
+  "What products is Taylor currently building?",
+  "Why did Taylor choose TanStack Start over Next.js for this portfolio?",
+  "How does the AI chat in this portfolio actually work?",
+  "What does Taylor mean by having a product-driven mindset?",
+  "Which AI models can I chat with on this site, and what are the limits?",
+];
