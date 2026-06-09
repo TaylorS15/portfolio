@@ -15,7 +15,12 @@ function Home() {
     <main className="m-4 flex flex-col items-center lg:mx-48 lg:my-24">
       <div className="flex w-full max-w-[72rem] flex-col gap-4 border-x border-t border-mist-300 p-4 md:flex-row">
         <div className="flex flex-col gap-4">
-          <div className="aspect-square w-72 bg-mist-200" />
+          <div className="aspect-square w-72 overflow-hidden bg-mist-200">
+            <img
+              src="/public/headshot.jpeg"
+              className="h-full w-full scale-135 object-cover object-center"
+            />
+          </div>
           <h1 className="my-auto text-2xl font-bold text-neutral-900">
             Taylor Svec
           </h1>
