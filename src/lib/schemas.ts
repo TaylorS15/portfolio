@@ -14,4 +14,11 @@ export const getPersonalSummary = toolDefinition({
   outputSchema: z.string(),
 });
 
+export const getPortfolioSummary = toolDefinition({
+  name: "get_portfolio_summary",
+  description:
+    "Get a short summary of Taylor Svec's portfolio tech stack and implementation details.",
+  outputSchema: z.string(),
+});
+
 export type ModelsType = z.infer<typeof modelsSchema>;

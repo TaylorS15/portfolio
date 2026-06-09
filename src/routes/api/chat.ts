@@ -1,5 +1,8 @@
 import { modelsSchema, type ModelsType } from "#/lib/schemas";
-import { getPersonalSummaryServer } from "#/lib/tools";
+import {
+  getPersonalSummaryServer,
+  getPortfolioSummaryServer,
+} from "#/lib/tools";
 import { createWorkersAiChat } from "@cloudflare/tanstack-ai/adapters/workers-ai";
 import {
   chat,
@@ -68,7 +71,7 @@ export const Route = createFileRoute("/api/chat")({
           const stream = chat({
             adapter: adapter,
             messages: params.messages,
-            tools: [getPersonalSummaryServer],
+            tools: [getPersonalSummaryServer, getPortfolioSummaryServer],
           });
 
           return toServerSentEventsResponse(stream);

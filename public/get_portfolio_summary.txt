@@ -1,0 +1,21 @@
+Taylor Svec — Portfolio Tech Stack Summary
+
+This portfolio is a modern, bleeding-edge web application built on the TanStack ecosystem and deployed to the edge via Cloudflare Workers. Its standout feature is an interactive, AI-powered chat widget that lets visitors ask questions about Taylor's background in real time.
+
+Core Framework & Language
+The site is built with TanStack Start, the full-stack React meta-framework (SSR, server functions, and API routes), rather than a more conventional choice like Next.js. Routing is handled by TanStack Router with file-based routing and an auto-generated route tree. The entire codebase is written in TypeScript (v6) running in strict mode, powering React 19.2 with the new React Compiler enabled for automatic memoization and optimization.
+
+Styling & UI
+Styling uses Tailwind CSS v4 through its native Vite plugin (no PostCSS or legacy config), with OKLCH-based color tokens and full light/dark theming defined via CSS variables. The component layer is built on shadcn/ui (the distinctive radix-lyra style) atop Radix UI primitives, with class-variance-authority, clsx, and tailwind-merge handling variant logic. The aesthetic is deliberately monospace-first, using the Geist Mono variable font via Fontsource, with tw-animate-css for animations and Lucide for icons.
+
+Build Tooling
+Bundling and dev serving are handled by Vite 8 (Rolldown-powered), with a layered plugin stack including the Cloudflare plugin, the Tailwind v4 plugin, the TanStack Start plugin, the React plugin, and a Babel pass for the React Compiler. State and forms are managed with TanStack Store and TanStack Form, while Zod v4 handles runtime validation.
+
+The AI Chat (Signature Feature)
+The heart of the project is an SSE-streaming AI chat assistant powered by the @tanstack/ai suite alongside Cloudflare's @cloudflare/tanstack-ai adapter. Requests hit a TanStack Start API route that validates the selected model with Zod, then streams responses through Cloudflare Workers AI via an AI Gateway. Visitors can pick between several models — Kimi-K2.6, GLM-4.7 Flash, and GPT-OSS-120b — with the chat capped at three user messages and 250-character inputs. A server-side tool (get_personal_summary) feeds the model context about Taylor's background, and streaming markdown is rendered with streamdown plus highlight.js syntax highlighting.
+
+Deployment & Tooling
+The app is deployed to Cloudflare Workers using Wrangler, configured with nodejs_compat and an AI binding, and authenticated to the AI Gateway via a CF_AIG_TOKEN secret. Code formatting is handled by Prettier with the Tailwind class-sorting plugin, and a Vitest 4 testing setup (with Testing Library and jsdom) is in place, ready for future tests. The project was originally scaffolded with create-tanstack-app.
+
+In Short
+A TypeScript + React 19 + TanStack Start portfolio, styled with Tailwind v4 and shadcn in a clean monospace Geist aesthetic, bundled by Vite 8 with the React Compiler, and deployed to Cloudflare Workers — distinguished by a live, model-switchable AI chat backed by Cloudflare Workers AI that can answer questions about its creator.
