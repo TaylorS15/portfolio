@@ -21,6 +21,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { ProjectCard } from "./project-card";
 
 type ChatStatus = ReturnType<typeof useChat>["status"];
 type ChatMessages = ReturnType<typeof useChat>["messages"];
@@ -180,7 +181,9 @@ export function Chat() {
         <Indicator status={indicatorStatus} />
         <Button
           className="mr-2 ml-auto border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
-          onClick={clear}
+          onClick={() => {
+            (clear(), setInput(""));
+          }}
         >
           Clear Chat
         </Button>
