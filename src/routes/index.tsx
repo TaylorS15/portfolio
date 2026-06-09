@@ -1,7 +1,12 @@
 import { Chat } from "#/components/chat";
 import { ProjectCard } from "#/components/project-card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "#/components/ui/tooltip";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Copy } from "lucide-react";
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -48,11 +53,49 @@ function Home() {
         </div>
       </div>
 
-      <div className="flex w-full max-w-[72rem] flex-col border border-mist-300 p-4">
+      <div className="flex w-full max-w-[72rem] flex-col border-x border-t border-mist-300 p-4">
         <Chat />
       </div>
 
-      <div></div>
+      <div className="flex w-full max-w-[72rem] flex-col border border-mist-300 p-4">
+        <h2 className="mb-2 text-lg font-medium text-neutral-800">Contact</h2>
+
+        <div className="flex w-min flex-row items-center gap-2 hover:cursor-pointer hover:underline">
+          <Tooltip>
+            <TooltipTrigger
+              className="group flex flex-row items-center gap-2 hover:cursor-pointer"
+              onClick={() => navigator.clipboard.writeText("tsvec15@yahoo.com")}
+            >
+              <p className="text-sm">tsvec15@yahoo.com</p>
+              <Copy
+                size={15}
+                className="transition group-active:translate-y-0.5 group-active:scale-80"
+              />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="text-xxs">Copy to clipboard</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+        <a
+          target="_blank"
+          href="https://github.com/TaylorS15"
+          className="flex w-min flex-row items-center gap-2 hover:cursor-pointer hover:underline"
+        >
+          <p className="text-sm">Github</p>
+          <ArrowUpRight size={15} />
+        </a>
+        <a target="_blank" href="https://github.com/TaylorS15">
+          <a
+            target="_blank"
+            href="https://linkedin.com/taylorsvec"
+            className="flex w-min flex-row items-center gap-2 hover:cursor-pointer hover:underline"
+          >
+            <p className="text-sm">LinkedIn</p>
+            <ArrowUpRight size={15} />
+          </a>
+        </a>
+      </div>
     </main>
   );
 }
