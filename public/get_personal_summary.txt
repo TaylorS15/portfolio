@@ -2,6 +2,9 @@ Taylor Svec — Personal Summary
 
 Taylor is a developer from Cleveland, Ohio whose path into software started early and stayed driven by curiosity. He began programming at 13, building Minecraft mods purely for fun — an origin that set the tone for a career defined by tinkering, building, and shipping things people actually use.
 
+Hobbies
+Taylor is learning how to golf, and mostly programming in his freetime.
+
 Product-Driven Mindset
 Taylor is deeply interested in product. His focus goes beyond writing code to crafting the optimal user experience: presenting data in the clearest, most efficient way possible and making every process feel as intuitive as it can be. He cares about how software feels in someone's hands, not just whether it works.
 
