@@ -5,7 +5,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "#/components/ui/tooltip";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Copy } from "lucide-react";
 
 export const Route = createFileRoute("/")({ component: Home });
