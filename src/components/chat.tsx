@@ -182,7 +182,8 @@ export function Chat() {
         <Button
           className="mr-2 ml-auto border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
           onClick={() => {
-            (clear(), setInput(""));
+            clear();
+            setInput("");
           }}
         >
           Clear Chat
