@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 
 export function ProjectCard({
@@ -19,9 +18,9 @@ export function ProjectCard({
         <p className="text-sm text-neutral-500">{description}</p>
       </div>
       {links.map((link, index) => (
-        <Link to={link} key={`${link}_${index}`}>
+        <a href={link} target="_blank" key={`${link}_${index}`}>
           <ArrowUpRight />
-        </Link>
+        </a>
       ))}
     </div>
   );
