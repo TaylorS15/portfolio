@@ -215,7 +215,6 @@ const questionSuggestions = [
   "What kind of work is Taylor looking for right now?",
   "Tell me about the AI chat app Taylor built for a Slovenian law firm.",
   "What products is Taylor currently building?",
-  "Why did Taylor choose TanStack Start over Next.js for this portfolio?",
   "How does the AI chat in this portfolio actually work?",
   "What does Taylor mean by having a product-driven mindset?",
   "Which AI models can I chat with on this site, and what are the limits?",
