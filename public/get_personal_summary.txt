@@ -2,6 +2,9 @@ Taylor Svec — Personal Summary
 
 Taylor is a developer from Cleveland, Ohio whose path into software started early and stayed driven by curiosity. He began programming at 13, building Minecraft mods purely for fun — an origin that set the tone for a career defined by tinkering, building, and shipping things people actually use.
 
+Web Development Start
+In 2022 Taylor jumped into web development, learning old-school React, building with Class Components. After going through a couple of online courses in web development and React, Taylor quickly started building his own projects.
+
 Hobbies
 Taylor is learning how to golf, and mostly programming in his freetime.
 
