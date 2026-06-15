@@ -36,3 +36,15 @@ export const getPortfolioSummaryServer = serverTool(
   "Get a short summary of Taylor Svec's portfolio tech stack and implementation details.",
   "/get_portfolio_summary.txt",
 );
+
+export const getTaylorsToolsSummaryServer = serverTool(
+  "get_taylors_tools_summary",
+  "Get a short summary on the web app Taylors Tools and what tech stack it uses.",
+  "/get_taylors_tools_summary.txt",
+);
+
+export const getGtoToGptSummaryServer = serverTool(
+  "get_gto_to_gpt_summary",
+  "Get a short summary on the AI poker coaching web app GTOtoGPT, what it does, and the tech stack across its client, server, and converter repos.",
+  "/get_gto_to_gpt_summary.txt",
+);

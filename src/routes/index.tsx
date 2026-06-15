@@ -52,8 +52,18 @@ function Home() {
 
           <ProjectCard
             name="Rolled"
-            description="Bankroll, session, and hand tracking for live poker players."
+            description="Bankroll, session, and hand tracking for live poker players. Coming Soon."
             links={[""]}
+          />
+          <ProjectCard
+            name="Taylors Tools"
+            description="Just some simple, one-time-use, web tools for dealing with PDFs, document signing, online faxes, AI transcripts, etc. WIP."
+            links={["https://taylorstools.com"]}
+          />
+          <ProjectCard
+            name="AIKrpan"
+            description="Freelance project for a Slovenian law firm looking to build an AI chat that is useful for analyzing law documents. Created the first two versions of the landing page and AI chat experience."
+            links={["https://aikrpan.com"]}
           />
           <ProjectCard
             name="GTOtoGPT"

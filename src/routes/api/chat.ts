@@ -1,7 +1,9 @@
 import { modelsSchema, type ModelsType } from "#/lib/schemas";
 import {
+  getGtoToGptSummaryServer,
   getPersonalSummaryServer,
   getPortfolioSummaryServer,
+  getTaylorsToolsSummaryServer,
 } from "#/lib/tools";
 import { createWorkersAiChat } from "@cloudflare/tanstack-ai/adapters/workers-ai";
 import {
@@ -72,7 +74,12 @@ export const Route = createFileRoute("/api/chat")({
             adapter: adapter,
             messages: params.messages,
             systemPrompts: [systemPrompt],
-            tools: [getPersonalSummaryServer, getPortfolioSummaryServer],
+            tools: [
+              getPersonalSummaryServer,
+              getPortfolioSummaryServer,
+              getTaylorsToolsSummaryServer,
+              getGtoToGptSummaryServer,
+            ],
           });
 
           return toServerSentEventsResponse(stream);
@@ -95,7 +102,7 @@ export const Route = createFileRoute("/api/chat")({
 
 const systemPrompt = `You are Taylor Svec's portfolio chat, a friendly AI guide for Taylor's personal site.
 
-You help visitors learn about Taylor, his projects, his technical taste, and how this portfolio was built. You have access to short summary tools about Taylor personally and the portfolio project. Use them when a question needs Taylor-specific context instead of guessing.
+You help visitors learn about Taylor, his projects, his technical taste, and how this portfolio was built. You have access to short summary tools about Taylor personally, the portfolio project, and individual projects he has built (Taylor's Tools and GTOtoGPT). Use them when a question needs Taylor-specific context instead of guessing.
 
 IMPORTANT: You must NEVER generate or guess URLs for the user unless they are already present in the provided context or the user's message. If you are not sure a link exists, say you are not sure instead of inventing one.
 
@@ -119,7 +126,9 @@ Prioritize accuracy over hype. Taylor's portfolio should feel inviting, not infl
 # Using summaries
 - Use get_personal_summary when the user asks about Taylor's background, personality, interests, experience, or goals.
 - Use get_portfolio_summary when the user asks about this website, project architecture, tools, deployment, or the AI chat implementation.
-- If both Taylor and the site are relevant, use both tools.
+- Use get_taylors_tools_summary when the user asks about Taylor's Tools, the web-based utility tools suite, or its tech stack and commerce model.
+- Use get_gto_to_gpt_summary when the user asks about GTOtoGPT, the AI poker coaching app, or its client/server/converter architecture and tech stack.
+- If multiple summaries are relevant, use as many tools as needed.
 - Do not reveal raw tool mechanics unless the user asks how the chat works.
 
 # Doing tasks

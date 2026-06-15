@@ -1,0 +1,24 @@
+Taylor's Tools — Project Summary
+
+Taylor's Tools is a web-based suite of simple, low-cost utility tools for the annoying one-off tasks people occasionally run into — its tagline is "Just some simple web tools for annoying tasks." The differentiator is a flexible, low-friction commerce model: every tool can be used with or without an account, you only pay after previewing the final output, and pricing works either pay-per-use or through cheaper account credits ($1 = 10 credits, with a $1 / 5-credit minimum per operation). Currently it ships an Image-to-PDF converter (with fit/stretch/fill layout options), an AI Audio-to-Transcript tool, and a PDF signing tool, with an ambitious roadmap beyond that.
+
+Core Framework & Language
+The app is built on Next.js 15 using the App Router, with React 18.3 and the experimental React Compiler enabled (via a Babel plugin) for automatic memoization. The entire codebase is TypeScript 5.7 in strict mode. It leans heavily on React Server Components and Server Actions for its data and tool-processing logic, and uses Bun as the package manager.
+
+Styling & UI
+Styling uses Tailwind CSS v3.4 with class-based dark mode and HSL CSS-variable design tokens. The component layer is shadcn/ui (the "new-york" style on a zinc base color) built atop Radix UI primitives, with class-variance-authority, clsx, and tailwind-merge handling variants. The aesthetic uses the Geist font, plus the cursive Allura font for the PDF signing feature, with Lucide for icons, a cmdk command palette for things like language selection, and Motion (the Framer Motion successor) for page transitions and modal animations.
+
+The Commerce Model (Signature Feature)
+The standout architectural idea is an auth-optional payment flow. The same tools work whether you're signed in (paying with credits) or anonymous (paying a one-off charge via Stripe embedded checkout, kept in-app with redirect_on_completion set to "never"). Pricing is computed server-side and re-verified at fulfillment to prevent double-spend, and some tools support adjustable per-minute pricing (like audio transcription). Anonymous users receive a six-character download code to retrieve their temporary files, which expire after 24 hours, while logged-in users can save outputs to their profile.
+
+Backend & Data Layer
+Authentication is handled by Clerk, with middleware protecting the dashboard and webhook-driven user syncing into the database. The database is Turso / libSQL, queried with raw SQL (no ORM) and validated row-by-row with Zod v3, with caching via React's cache() and Next.js unstable_cache. Files are stored in AWS S3 behind presigned, time-limited download URLs. Payments run through Stripe (embedded checkout plus webhooks for credit fulfillment), transactional email through Resend with React email templates, and client data fetching through TanStack React Query. File processing relies on pdf-lib, sharp, and music-metadata.
+
+AI Features
+The Audio-to-Transcript tool uses OpenAI's Whisper (whisper-1) model to transcribe audio and video into SRT subtitle format across multiple languages. A notable detail is that video files are transcoded to MP3 entirely in the browser using FFmpeg compiled to WebAssembly (@ffmpeg/ffmpeg) before upload — reducing payload size and computing duration client-side for accurate per-minute pricing.
+
+Build Tooling & Deployment
+The project uses Next.js's built-in build pipeline with PostCSS, ESLint with the Next.js config for linting, and is deployed to Vercel. State for the tool flows is driven largely by URL search params acting as a state machine (input → checkout → loading → success), with safeguards to prevent users from navigating away mid-processing.
+
+In Short
+A TypeScript + Next.js 15 micro-tools SaaS platform, styled with Tailwind and shadcn/ui in a clean Geist aesthetic, backed by Clerk auth, a Turso/libSQL database, AWS S3 storage, and Stripe payments — distinguished by an auth-optional, pay-after-preview commerce model and in-browser FFmpeg preprocessing for its OpenAI Whisper-powered transcription tool. Deployed on Vercel, it's an early-stage solo project with a handful of working tools and a broad roadmap.
