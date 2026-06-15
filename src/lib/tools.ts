@@ -1,6 +1,7 @@
 import { toolDefinition } from "@tanstack/ai";
 import { safeParse } from "zod";
 import * as z from "zod";
+import { env } from "cloudflare:workers";
 
 const serverTool = (name: string, description: string, filePath: string) => {
   return toolDefinition({
@@ -9,7 +10,9 @@ const serverTool = (name: string, description: string, filePath: string) => {
     outputSchema: z.string(),
   }).server(async () => {
     try {
-      const response = await fetch(filePath);
+      const response = await env.ASSETS.fetch(
+        new URL(filePath, "https://assets.local"),
+      );
       const data = await response.text();
 
       const result = safeParse(z.string(), data);
