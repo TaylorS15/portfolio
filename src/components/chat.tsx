@@ -209,11 +209,29 @@ export function Chat() {
 }
 
 const questionSuggestions = [
+  // Personal
   "How did Taylor get started in software development?",
   "What kind of work is Taylor looking for right now?",
-  "Tell me about the AI chat app Taylor built for a Slovenian law firm.",
-  "What products is Taylor currently building?",
-  "How does the AI chat in this portfolio actually work?",
   "What does Taylor mean by having a product-driven mindset?",
+  "When did Taylor start building for AI, and why?",
+  "What was Taylor's first paid developer gig?",
+  // Portfolio
+  "How does the AI chat in this portfolio actually work?",
   "Which AI models can I chat with on this site, and what are the limits?",
+  "What tech stack is this portfolio built with?",
+  "Why was TanStack Start chosen over Next.js for this site?",
+  "Where is this portfolio deployed and how?",
+  // AIKrpan
+  "Tell me about the AI chat app Taylor built for a Slovenian law firm.",
+  "What was Taylor's role on the AIKrpan project?",
+  "What tech stack powers AIKrpan's frontend?",
+  // Taylor's Tools
+  "What is Taylor's Tools and what problem does it solve?",
+  "How does the pay-after-preview commerce model in Taylor's Tools work?",
+  "How does the Audio-to-Transcript tool handle video files in the browser?",
+  "What tools does Taylor's Tools currently offer?",
+  // GTOtoGPT
+  "What is GTOtoGPT and how does it coach poker players?",
+  "How does GTOtoGPT's multi-stage GPT-4o RAG pipeline work?",
+  "What does the GTOtoGPT converter do with PioSOLVER data?",
 ];
