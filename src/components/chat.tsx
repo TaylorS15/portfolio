@@ -1,4 +1,16 @@
+import { modelsSchema, type ModelsType } from "#/lib/schemas";
+import type { IndicatorStatus } from "#/lib/types";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import type { ToolCallPart } from "@tanstack/ai-client";
+import { fetchServerSentEvents, useChat } from "@tanstack/ai-react";
+import { useState } from "react";
 import { Indicator } from "./indicator";
+import { Button } from "./ui/button";
 import {
   Select,
   SelectContent,
@@ -8,20 +20,6 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Textarea } from "./ui/textarea";
-import { modelsSchema } from "#/lib/schemas";
-import type { IndicatorStatus } from "#/lib/types";
-import { useState } from "react";
-import { useChat, fetchServerSentEvents } from "@tanstack/ai-react";
-import type { ToolCallPart } from "@tanstack/ai-client";
-import { Button } from "./ui/button";
-import { type ModelsType } from "#/lib/schemas";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { ProjectCard } from "./project-card";
 
 type ChatStatus = ReturnType<typeof useChat>["status"];
 type ChatMessages = ReturnType<typeof useChat>["messages"];
