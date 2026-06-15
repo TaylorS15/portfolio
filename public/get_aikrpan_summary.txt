@@ -1,0 +1,9 @@
+AIKrpan — Project Summary
+
+AIKrpan is an AI chat application Taylor built in partnership with a Slovenian law firm, designed to let lawyers access and parse legal documents with ease. Taylor worked on the frontend of the project, collaborating across a language barrier to deliver a polished result.
+
+Tech Stack
+The frontend is a fairly straightforward, modern React application — mostly base React with Redux for state management and Tailwind CSS for styling. It includes an in-app PDF viewer (via an npm PDF-viewing package) so users can read and work with legal documents directly inside the app. Taylor focused on the frontend; the backend was built primarily in Python.
+
+In Short
+A React + Redux + Tailwind frontend for an AI-powered legal document chat tool, built for a Slovenian law firm with an in-app PDF viewer and a Python backend. Taylor led the frontend work on the project.

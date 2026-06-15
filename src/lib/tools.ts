@@ -48,3 +48,9 @@ export const getGtoToGptSummaryServer = serverTool(
   "Get a short summary on the AI poker coaching web app GTOtoGPT, what it does, and the tech stack across its client, server, and converter repos.",
   "/get_gto_to_gpt_summary.txt",
 );
+
+export const getAiKrpanSummaryServer = serverTool(
+  "get_aikrpan_summary",
+  "Get a short summary on AIKrpan, the AI legal document chat app Taylor built for a Slovenian law firm, and the tech stack it uses.",
+  "/get_aikrpan_summary.txt",
+);
