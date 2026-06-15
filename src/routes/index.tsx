@@ -17,7 +17,7 @@ function Home() {
         <div className="flex flex-col gap-4">
           <div className="aspect-square w-72 overflow-hidden bg-mist-200">
             <img
-              src="/public/headshot.jpeg"
+              src="/headshot.jpeg"
               className="h-full w-full scale-135 object-cover object-center"
             />
           </div>
