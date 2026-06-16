@@ -7,6 +7,7 @@ const serverTool = (name: string, description: string, filePath: string) => {
   return toolDefinition({
     name,
     description,
+    inputSchema: z.object({}),
     outputSchema: z.string(),
   }).server(async () => {
     try {
