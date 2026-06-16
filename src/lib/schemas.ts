@@ -2,9 +2,9 @@ import { toolDefinition } from "@tanstack/ai";
 import * as z from "zod";
 
 export const modelsSchema = z.union([
-  z.literal("Kimi-K2.6"),
   z.literal("GLM-4.7 Flash"),
   z.literal("GPT-OSS-120b"),
+  z.literal("Kimi-K2.6"),
 ]);
 
 export const getPersonalSummary = toolDefinition({
