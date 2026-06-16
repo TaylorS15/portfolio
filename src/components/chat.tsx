@@ -131,7 +131,8 @@ export function Chat() {
                   return (
                     <Streamdown
                       key={`${part.type}_${idx}`}
-                      className="text-sm text-mist-700 [&_a]:underline [&_code]:rounded [&_code]:bg-mist-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-xs [&_em]:italic [&_h1]:mt-3 [&_h1]:mb-1 [&_h1]:text-base [&_h1]:font-medium [&_h2]:mt-3 [&_h2]:mb-1 [&_h2]:text-sm [&_h2]:font-medium [&_h3]:mt-2 [&_h3]:mb-1 [&_h3]:text-sm [&_h3]:font-medium [&_li]:my-0.5 [&_ol]:my-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:my-1 [&_pre]:my-2 [&_pre]:overflow-x-auto [&_pre]:rounded [&_pre]:bg-mist-100 [&_pre]:p-2 [&_strong]:font-semibold [&_ul]:my-1 [&_ul]:list-disc [&_ul]:pl-5 [&>:first-child]:mt-0 [&>:last-child]:mb-0"
+                      animated
+                      isAnimating={status === "streaming"}
                     >
                       {part.content}
                     </Streamdown>
