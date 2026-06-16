@@ -131,6 +131,7 @@ export function Chat() {
                   return (
                     <Streamdown
                       key={`${part.type}_${idx}`}
+                      className="text-sm"
                       animated
                       isAnimating={status === "streaming"}
                     >
