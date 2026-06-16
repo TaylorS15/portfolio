@@ -67,7 +67,7 @@ function Home() {
           />
           <ProjectCard
             name="GTOtoGPT"
-            description="Made early in 2023, but mostly deprecated. Combines hundreds of gigabytes of poker solver outputs, stored in a vector database, and general poker knowledge to give users insights into their hands and questions about game strategy."
+            description="Made early in 2024, but mostly deprecated. Combines hundreds of gigabytes of poker solver outputs, stored in a vector database, and general poker knowledge to give users insights into their hands and questions about game strategy."
             links={["https://gtotogpt.com"]}
           />
         </div>
