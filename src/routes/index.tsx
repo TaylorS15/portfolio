@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
   return (
-    <main className="m-4 flex flex-col items-center lg:mx-48 lg:mt-12 lg:mb-24">
+    <main className="m-4 flex flex-col items-center lg:mx-52 lg:my-12">
       <div className="flex w-full max-w-[72rem] flex-col gap-4 border-x border-t border-mist-300 p-4 md:flex-row">
         <div className="flex flex-col gap-4">
           <div className="aspect-square w-72 overflow-hidden bg-mist-200">
