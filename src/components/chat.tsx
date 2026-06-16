@@ -69,7 +69,8 @@ function getIndicatorStatus({
 
 export function Chat() {
   const [input, setInput] = useState<string>("");
-  const [selectedModel, setSelectedModel] = useState<ModelsType>();
+  const [selectedModel, setSelectedModel] =
+    useState<ModelsType>("GLM-4.7 Flash");
 
   const { messages, sendMessage, isLoading, clear, status } = useChat({
     connection: fetchServerSentEvents("/api/chat"),
