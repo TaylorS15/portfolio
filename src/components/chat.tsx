@@ -147,66 +147,71 @@ export function Chat() {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-2 flex h-18 items-end gap-2">
-        <Textarea
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-          maxLength={250}
-          className="h-full resize-none text-sm placeholder:text-mist-400"
-          placeholder="Ask anything about myself, my projects, or even how this AI chat is built!"
-        />
+      <div className="flex flex-col">
+        <form
+          onSubmit={handleSubmit}
+          className="mt-2 flex flex-col items-end gap-2 md:h-18 md:flex-row"
+        >
+          <Textarea
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+            maxLength={250}
+            className="h-full resize-none text-sm placeholder:text-mist-400"
+            placeholder="Ask anything about myself, my projects, or even how this AI chat is built!"
+          />
 
-        <div className="flex flex-col gap-2">
+          <div className="flex w-full flex-col gap-2 md:w-auto">
+            <Button
+              type="button"
+              onClick={() => {
+                const randomQuestion =
+                  questionSuggestions[
+                    Math.floor(Math.random() * questionSuggestions.length)
+                  ];
+                setInput(randomQuestion);
+              }}
+              className="border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
+            >
+              Question Suggestion
+            </Button>
+            <Button
+              type="submit"
+              className="border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
+            >
+              Send
+            </Button>
+          </div>
+        </form>
+
+        <div className="mt-2 flex grow items-center">
+          <Indicator status={indicatorStatus} />
           <Button
-            type="button"
+            className="mr-2 ml-auto border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
             onClick={() => {
-              const randomQuestion =
-                questionSuggestions[
-                  Math.floor(Math.random() * questionSuggestions.length)
-                ];
-              setInput(randomQuestion);
+              clear();
+              setInput("");
             }}
-            className="border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
           >
-            Question Suggestion
+            Clear Chat
           </Button>
-          <Button
-            type="submit"
-            className="border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
+          <Select
+            value={selectedModel}
+            onValueChange={(value) => setSelectedModel(value as ModelsType)}
           >
-            Send
-          </Button>
+            <SelectTrigger className="h-6 w-40">
+              <SelectValue placeholder="Select Model" />
+            </SelectTrigger>
+            <SelectContent position="popper">
+              <SelectGroup>
+                {modelsSchema.options.map(({ value }, index) => (
+                  <SelectItem value={value} key={`${value}_${index}`}>
+                    {value}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
-      </form>
-
-      <div className="mt-2 flex h-8 items-center">
-        <Indicator status={indicatorStatus} />
-        <Button
-          className="mr-2 ml-auto border border-mist-200 bg-mist-50 text-mist-500 hover:cursor-pointer hover:bg-mist-100"
-          onClick={() => {
-            clear();
-            setInput("");
-          }}
-        >
-          Clear Chat
-        </Button>
-        <Select
-          value={selectedModel}
-          onValueChange={(value) => setSelectedModel(value as ModelsType)}
-        >
-          <SelectTrigger className="h-6 w-40">
-            <SelectValue placeholder="Select Model" />
-          </SelectTrigger>
-          <SelectContent position="popper">
-            <SelectGroup>
-              {modelsSchema.options.map(({ value }, index) => (
-                <SelectItem value={value} key={`${value}_${index}`}>
-                  {value}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
       </div>
     </>
   );
