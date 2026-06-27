@@ -105,15 +105,13 @@ function Home() {
           <p className="text-sm">Github</p>
           <ArrowUpRight size={15} />
         </a>
-        <a target="_blank" href="https://github.com/TaylorS15">
-          <a
-            target="_blank"
-            href="https://linkedin.com/taylorsvec"
-            className="flex w-min flex-row items-center gap-2 hover:cursor-pointer hover:underline"
-          >
-            <p className="text-sm">LinkedIn</p>
-            <ArrowUpRight size={15} />
-          </a>
+        <a
+          target="_blank"
+          href="https://linkedin.com/taylorsvec"
+          className="flex w-min flex-row items-center gap-2 hover:cursor-pointer hover:underline"
+        >
+          <p className="text-sm">LinkedIn</p>
+          <ArrowUpRight size={15} />
         </a>
       </div>
     </main>
