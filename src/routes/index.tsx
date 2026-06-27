@@ -113,6 +113,14 @@ function Home() {
           <p className="text-sm">LinkedIn</p>
           <ArrowUpRight size={15} />
         </a>
+        <a
+          target="_blank"
+          href="https://github.com/TaylorS15/portfolio"
+          className="flex w-min flex-row items-center gap-2 hover:cursor-pointer hover:underline"
+        >
+          <p className="text-sm">Source Code</p>
+          <ArrowUpRight size={15} />
+        </a>
       </div>
     </main>
   );
