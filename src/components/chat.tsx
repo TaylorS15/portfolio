@@ -96,7 +96,7 @@ export function Chat() {
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`mb-2 w-max max-w-[36rem] border border-mist-200 p-2 ${message.role === "assistant" ? "" : "ml-auto"}`}
+            className={`mb-2 w-10/12 max-w-[36rem] border border-mist-200 p-2 md:w-max ${message.role === "assistant" ? "" : "ml-auto"}`}
           >
             <p className="mb-1 text-xs font-light text-mist-400">
               {message.role === "assistant" ? "Assistant" : "You"}
