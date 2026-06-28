@@ -80,7 +80,7 @@ function Home() {
       <div className="flex w-full max-w-[72rem] flex-col border border-mist-300 p-4">
         <h2 className="mb-2 text-lg font-medium text-neutral-800">Contact</h2>
 
-        <div className="flex w-min flex-row items-center gap-2 hover:cursor-pointer hover:underline">
+        <div className="flex w-fit flex-row items-center gap-2 hover:cursor-pointer hover:underline">
           <Tooltip>
             <TooltipTrigger
               className="group flex flex-row items-center gap-2 hover:cursor-pointer"
@@ -100,7 +100,7 @@ function Home() {
         <a
           target="_blank"
           href="https://github.com/TaylorS15"
-          className="flex w-min flex-row items-center gap-2 hover:cursor-pointer hover:underline"
+          className="wfit flex flex-row items-center gap-2 hover:cursor-pointer hover:underline"
         >
           <p className="text-sm">Github</p>
           <ArrowUpRight size={15} />
@@ -108,7 +108,7 @@ function Home() {
         <a
           target="_blank"
           href="https://linkedin.com/taylorsvec"
-          className="flex w-min flex-row items-center gap-2 hover:cursor-pointer hover:underline"
+          className="flex w-fit flex-row items-center gap-2 hover:cursor-pointer hover:underline"
         >
           <p className="text-sm">LinkedIn</p>
           <ArrowUpRight size={15} />
@@ -116,7 +116,7 @@ function Home() {
         <a
           target="_blank"
           href="https://github.com/TaylorS15/portfolio"
-          className="flex w-min flex-row items-center gap-2 hover:cursor-pointer hover:underline"
+          className="flex w-fit flex-row items-center gap-2 hover:cursor-pointer hover:underline"
         >
           <p className="text-sm">Source Code</p>
           <ArrowUpRight size={15} />
